@@ -5,4 +5,8 @@
 #ifndef HOME_STATION_BSP_HPP
 #define HOME_STATION_BSP_HPP
 
+namespace bsp {
+    void init();
+}
+
 #endif //HOME_STATION_BSP_HPP

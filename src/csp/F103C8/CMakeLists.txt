@@ -1,0 +1,60 @@
+set(STM32_CUBE_F1_PATH ${CMAKE_SOURCE_DIR}/src/toolchain/ST/STM32CubeF1-1.8.3)
+set(FREERTOS_PATH ${STM32_CUBE_F1_PATH}/Middlewares/Third_Party/FreeRTOS)
+
+find_package(CMSIS COMPONENTS STM32F1 RTOS_V2 REQUIRED)
+find_package(HAL COMPONENTS STM32F1 RCC GPIO CORTEX TIM FLASH UART USART DMA PCD LL_USB REQUIRED)
+find_package(FreeRTOS COMPONENTS ARM_CM3 REQUIRED)
+
+add_library(csp_f103xb_meteostation INTERFACE)
+
+target_include_directories(csp_f103xb_meteostation INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/App
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/Target
+    ${STM32_CUBE_F1_PATH}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+)
+
+target_sources(csp_f103xb_meteostation INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/gpio.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/i2c.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/iwdg.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/freertos.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/usart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/stm32f1xx_hal_msp.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/stm32f1xx_hal_timebase_tim.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/stm32f1xx_it.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/App/usb_device.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/App/usbd_cdc_if.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/App/usbd_desc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/USB_DEVICE/Target/usbd_conf.c
+    ${STM32_CUBE_F1_PATH}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/src/usbd_cdc.c
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+    ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+)
+
+target_link_libraries(csp_f103xb_meteostation INTERFACE
+    HAL::STM32::F1::RCC
+    HAL::STM32::F1::RCCEx
+    HAL::STM32::F1::CORTEX
+    HAL::STM32::F1::GPIO
+    HAL::STM32::F1::FLASH
+    HAL::STM32::F1::FLASHEx
+    HAL::STM32::F1::TIM
+    HAL::STM32::F1::TIMEx
+    HAL::STM32::F1::PCD
+    HAL::STM32::F1::PCDEx
+    HAL::STM32::F1::LL_USB
+    HAL::STM32::F1::UART
+    HAL::STM32::F1::DMA
+    CMSIS::STM32::F103xB
+    STM32::NoSys
+    FreeRTOS::ARM_CM3
+)
+
+add_library(CSP::F103xB::METEOSTATION ALIAS csp_f103xb_meteostation)
+
