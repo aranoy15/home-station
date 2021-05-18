@@ -1,1 +1,1 @@
-add_subdirectory(F103C8)
+add_subdirectory(ST/F103C8)

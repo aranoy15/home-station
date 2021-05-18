@@ -18,7 +18,7 @@ add_custom_target(boot.generate_bin ALL
     DEPENDS boot
 )
 
-add_custom_target(${TARGET}.size ALL
+add_custom_target(boot.size ALL
     ${STM32_TARGET_TRIPLET}-size ${CMAKE_BINARY_DIR}/src/boot/boot.elf
     DEPENDS boot
 )

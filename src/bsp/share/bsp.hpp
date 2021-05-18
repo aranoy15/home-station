@@ -5,6 +5,10 @@
 #ifndef HOME_STATION_BSP_HPP
 #define HOME_STATION_BSP_HPP
 
+#if defined(USE_LOG)
+#include <log.hpp>
+#endif
+
 namespace bsp {
     void init();
 }
