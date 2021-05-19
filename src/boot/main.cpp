@@ -4,22 +4,32 @@
 
 #include <bsp.hpp>
 #include <os.hpp>
+#include <data/vector.hpp>
 
 int main()
 {
     bsp::init();
     bsp::log::init();
 
-    [[maybe_unused]] const uint8_t data[] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '\r', '\n'};
+    const uint8_t data[] = {'H', 'e', 'l', 'l', 'o', ',', ' ',
+                            'W', 'o', 'r', 'l', 'd', '\n'};
 
-    [[maybe_unused]] uint32_t start = os::tick::current();
+    uint32_t start = os::tick::current();
 
-    while(true) {
+    using data_t = library::data::Vector<uint8_t, 1024>;
+
+    data_t output_data;
+    uint8_t temp_data[1] = {0};
+
+    while (true) {
         if ((os::tick::current() - start) >= 1000) {
             bsp::log::transmit(data, sizeof(data));
             start = os::tick::current();
         }
-        //os::tick::delay(1000);
 
+        if (bsp::log::receive(temp_data, sizeof(temp_data))) {
+            //bsp::log::transmit(temp_data, sizeof(temp_data));
+            output_data.push_back(temp_data[0]);
+        }
     }
 }

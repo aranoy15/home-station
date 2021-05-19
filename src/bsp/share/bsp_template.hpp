@@ -2,8 +2,8 @@
 // Created by Антон Федосеев on 16.05.2021.
 //
 
-#ifndef HOME_STATION_BSP_HPP
-#define HOME_STATION_BSP_HPP
+#ifndef HOME_STATION_BSP_TEMPLATE_HPP
+#define HOME_STATION_BSP_TEMPLATE_HPP
 
 #if defined(USE_LOG)
 #include <log.hpp>
@@ -13,4 +13,4 @@ namespace bsp {
     void init();
 }
 
-#endif //HOME_STATION_BSP_HPP
+#endif  // HOME_STATION_BSP_TEMPLATE_HPP

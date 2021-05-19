@@ -2,8 +2,8 @@
 // Created by afedoseev on 18.05.2021.
 //
 
-#include <os.hpp>
 #include <main.h>
+#include <os.hpp>
 
 void os::init() {}
 

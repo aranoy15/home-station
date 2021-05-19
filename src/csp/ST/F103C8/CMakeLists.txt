@@ -8,15 +8,16 @@ add_library(csp_f103xb_meteostation_core INTERFACE)
 add_library(csp_f103xb_meteostation_usb INTERFACE)
 
 target_include_directories(csp_f103xb_meteostation_core INTERFACE
-        src/Core/Inc
-        ../../share
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Inc
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../share
+        ${CMAKE_CURRENT_SOURCE_DIR}
         )
 
 target_include_directories(csp_f103xb_meteostation_usb INTERFACE
-        src/Core/Inc
-        ../../share
-        src/USB_DEVICE/App
-        src/USB_DEVICE/Target
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Inc
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../share
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/USB_DEVICE/App
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/USB_DEVICE/Target
         ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
         ${STM32_CUBE_F1_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
 
@@ -56,6 +57,8 @@ target_link_libraries(csp_f103xb_meteostation_core INTERFACE
         HAL::STM32::F1::TIMEx
         CMSIS::STM32::F103xB
         STM32::NoSys
+
+        OS::NO_OS
         )
 
 target_link_libraries(csp_f103xb_meteostation_usb INTERFACE

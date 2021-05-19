@@ -2,8 +2,8 @@
 // Created by afedoseev on 18.05.2021.
 //
 
-#ifndef HOME_STATION_OS_HPP
-#define HOME_STATION_OS_HPP
+#ifndef HOME_STATION_OS_TEMPLATE_HPP
+#define HOME_STATION_OS_TEMPLATE_HPP
 
 #include <cinttypes>
 
@@ -18,4 +18,4 @@ namespace tick
 }
 }
 
-#endif  // HOME_STATION_OS_HPP
+#endif  // HOME_STATION_OS_TEMPLATE_HPP
